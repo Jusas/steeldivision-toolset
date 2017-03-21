@@ -16,10 +16,8 @@ namespace ReplayToolbox.Models
         [JsonConverter(typeof(StringToBooleanJsonConverter))]
         public bool Private { get; set; }
         public string ServerName { get; set; }
-        [JsonConverter(typeof(StringToBooleanJsonConverter))]
         public string Version { get; set; }
-        [JsonConverter(typeof(StringToBooleanJsonConverter))]
-        public object GameType { get; set; }
+        public string GameType { get; set; }
         public string Map { get; set; }
         public int InitMoney { get; set; }
         public int TimeLimit { get; set; }
