@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using ReplayToolbox.Exceptions;
 using ReplayToolbox.Models;
 
 namespace ReplayToolbox
@@ -27,9 +28,9 @@ namespace ReplayToolbox
             {
                 await r.ValidateAndReadHeader();
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return null;
+                throw new ReplayParseException("Header validation failed", e);
             }
             return r;
         }
@@ -49,7 +50,7 @@ namespace ReplayToolbox
             }
             catch (Exception e)
             {
-                throw new Exception("Header read and validation failed", e);
+                throw new ReplayParseException("Header validation failed", e);
             }
 
             return r;
