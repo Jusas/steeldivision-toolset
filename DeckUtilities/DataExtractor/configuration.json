@@ -1,0 +1,11 @@
+﻿{
+  "DataSources": [
+    "H:\\tmp\\SteelDivisionData\\Data\\PC\\300077108\\NDF_Win.dat",
+    "H:\\tmp\\SteelDivisionData\\Data\\PC\\300077108\\ZZ_Win.dat"
+  ],
+  "DataMappings": {
+    "DeckData": "$(DataSources.0):pc\\ndf\\patchable\\gfx\\everything.ndfbin",
+    "LocalizationOutgame": "$(DataSources.1):pc\\localisation\\us\\localisation\\interface_outgame.dic",
+    "LocalizationDeck": "$(DataSources.1):pc\\localisation\\us\\localisation\\unites.dic"
+  }
+}
