@@ -39,7 +39,7 @@ namespace DataExtractor.Extractors
                 outputData.Add(division);
 
                 var kvMap = divisionMap[i].Value as NdfMap;
-                division.Id = i;
+                division.Id = (int)(UInt32)((kvMap.Value as MapValueHolder).Value as NdfUInt32).Value;
 
                 var mapValue = kvMap.Key as MapValueHolder;
                 var divRef = mapValue.Value as NdfObjectReference;

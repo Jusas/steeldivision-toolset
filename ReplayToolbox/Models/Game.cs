@@ -25,5 +25,6 @@ namespace ReplayToolbox.Models
         public int NbAI { get; set; }
         public string VictoryCond { get; set; }
         public int IncomeRate { get; set; }
+        public string ModList { get; set; }
     }
 }
