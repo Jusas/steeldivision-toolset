@@ -12,10 +12,6 @@ namespace ReplayToolbox
 {
     public class Replay
     {
-
-        private const long HeaderDataLengthPos = 24;
-        private const long HeaderDataPos = 32;
-
         private bool _ownsStream = true;
         private Stream _dataStream;
 
@@ -77,7 +73,25 @@ namespace ReplayToolbox
             if (bytesRead != 4 || Encoding.ASCII.GetString(buf) != "ESAV")
                 throw new Exception("Invalid replay file header!");
 
-            _dataStream.Seek(HeaderDataLengthPos, SeekOrigin.Begin);
+
+            int replayLengthOffset = 4 /*ESAV*/ + 4 /*4 bytes after rply*/;
+            bool foundRply = false;
+            while (await _dataStream.ReadAsync(buf, 0, 4) == 4)
+            {
+                replayLengthOffset += 4;
+                if (Encoding.ASCII.GetString(buf) == "rply")
+                {
+                    foundRply = true;
+                    break;
+                }
+            }
+
+            if(!foundRply)
+                throw new Exception("Invalid replay file header!");
+
+            var headerDataPos = replayLengthOffset + 8;
+
+            _dataStream.Seek(replayLengthOffset, SeekOrigin.Begin);
             bytesRead = await _dataStream.ReadAsync(buf, 0, 4);
             if (bytesRead != 4)
                 throw new Exception("Unexpected number of bytes read while reading header!");
@@ -89,7 +103,7 @@ namespace ReplayToolbox
             if (headerDataLength <= 0 || headerDataLength > 50000)
                 throw new Exception("Unexpected header data length read, expected a value between 0 and 50 000!");
 
-            _dataStream.Seek(HeaderDataPos, 0);
+            _dataStream.Seek(headerDataPos, 0);
             buf = new byte[headerDataLength];
             bytesRead = await _dataStream.ReadAsync(buf, 0, headerDataLength);
             if (bytesRead != headerDataLength)
