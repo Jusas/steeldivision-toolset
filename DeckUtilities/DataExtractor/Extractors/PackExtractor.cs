@@ -39,7 +39,7 @@ namespace DataExtractor.Extractors
                 outputData.Add(pack);
 
                 var kvMap = packMap[i].Value as NdfMap;
-                pack.Id = i;
+                pack.Id = (int)(UInt32)((kvMap.Value as MapValueHolder).Value as NdfUInt32).Value;
 
                 var mapValue = kvMap.Key as MapValueHolder;
                 var packRef = mapValue.Value as NdfObjectReference;
