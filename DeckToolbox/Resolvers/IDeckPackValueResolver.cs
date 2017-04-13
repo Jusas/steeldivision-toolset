@@ -10,8 +10,13 @@ namespace DeckToolbox.Resolvers
         int GetFactoryType(int packId);
         int GetExperienceLevel(int packId);
         string GetTransportName(int packId);
+        int GetTransportPrice(int packId);
         string GetUnitName(int packId);
+        int GetUnitPrice(int packId);
         int GetUnitCount(int packId);
         string GetFactoryName(int packId);
+        bool GetIsRecon(int packId);
+        bool GetIsCommand(int packId);
+        string[] GetValidPackFactoryNames();
     }
 }

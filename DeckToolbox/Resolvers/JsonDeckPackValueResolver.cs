@@ -78,6 +78,11 @@ namespace DeckToolbox.Resolvers
             if (fac == null)
                 return "unknown";
 
+            return GetFactoryNameForFactoryId(fac.Value);
+        }
+
+        private string GetFactoryNameForFactoryId(int fac)
+        {
             // Hardcoded...
             switch (fac)
             {
@@ -100,6 +105,60 @@ namespace DeckToolbox.Resolvers
                 default:
                     return "unknown";
             }
+        }
+
+        public bool GetIsRecon(int packId)
+        {
+            var source = _dataSources["Packs"];
+            var descriptorId = source.FirstOrDefault(x => x["Id"].ToString() == packId.ToString())?["UnitDescriptorId"].ToString();
+
+            if (descriptorId == null)
+                return false;
+
+            var unitSource = _dataSources["Units"];
+            return unitSource.FirstOrDefault(x => x["DescriptorId"].ToString() == descriptorId)?["ResolvedIsRecon"].Value<bool>() ?? false;
+        }
+
+        public bool GetIsCommand(int packId)
+        {
+            var source = _dataSources["Packs"];
+            var descriptorId = source.FirstOrDefault(x => x["Id"].ToString() == packId.ToString())?["UnitDescriptorId"].ToString();
+
+            if (descriptorId == null)
+                return false;
+
+            var unitSource = _dataSources["Units"];
+            return unitSource.FirstOrDefault(x => x["DescriptorId"].ToString() == descriptorId)?["ResolvedIsCommand"].Value<bool>() ?? false;
+        }
+
+        public int GetTransportPrice(int packId)
+        {
+            var source = _dataSources["Packs"];
+            var descriptorId = source.FirstOrDefault(x => x["Id"].ToString() == packId.ToString())?["TransportDescriptorId"].ToString();
+
+            if (descriptorId == null)
+                return 0;
+
+            var unitSource = _dataSources["Units"];
+            return unitSource.FirstOrDefault(x => x["DescriptorId"].ToString() == descriptorId)?["ProductionPrice"].Value<int>() ?? 0;
+        }
+
+        public int GetUnitPrice(int packId)
+        {
+            var source = _dataSources["Packs"];
+            var descriptorId = source.FirstOrDefault(x => x["Id"].ToString() == packId.ToString())?["UnitDescriptorId"].ToString();
+
+            if (descriptorId == null)
+                return 0;
+
+            var unitSource = _dataSources["Units"];
+            return unitSource.FirstOrDefault(x => x["DescriptorId"].ToString() == descriptorId)?["ProductionPrice"].Value<int>() ?? 0;
+        }
+
+        public string[] GetValidPackFactoryNames()
+        {
+            var factoryIds = new int[] {3, 4, 6, 7, 10, 13, 14, 15};
+            return factoryIds.Select(x => GetFactoryNameForFactoryId(x)).ToArray();
         }
     }
 }
