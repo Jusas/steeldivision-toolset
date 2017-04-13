@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using DeckToolbox.Utils;
+using Newtonsoft.Json.Linq;
 
 namespace DeckToolbox.Resolvers
 {
@@ -45,6 +46,13 @@ namespace DeckToolbox.Resolvers
             var incomeValues = source.FirstOrDefault(x => x["Id"].ToString() == divisionId.ToString())?["PhaseIncome"];
             var values = incomeValues?.Values<int>().ToArray();
             return values;
+        }
+
+        public int GetNationality(int divisionId)
+        {
+            var source = _dataSources["Divisions"];
+            var nationality = source.FirstOrDefault(x => x["Id"].ToString() == divisionId.ToString())?["Nationality"].Value<int>();
+            return nationality ?? -1;
         }
     }
 }

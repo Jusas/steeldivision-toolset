@@ -51,6 +51,8 @@ namespace DataExtractor.Extractors
                 division.DivisionNickName = dataSource.GetLocalizedString(divInst.GetInstancePropertyValue<string>("DivisionNickName") as string,
                     configuration.DataMappings["LocalizationDeck"]);
 
+                division.Nationality = (int) divInst.GetInstancePropertyValue<int>("DivisionNationalite");
+
                 var phaseList = divInst.PropertyValues.First(x => x.Property.Name == "PhaseList").Value as NdfCollection;
 
                 List<int> incomes = new List<int>();

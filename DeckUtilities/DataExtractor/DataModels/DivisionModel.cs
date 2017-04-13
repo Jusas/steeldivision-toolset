@@ -12,5 +12,6 @@ namespace DataExtractor.DataModels
         public string DivisionName { get; set; }
         public string DivisionNickName { get; set; }
         public int[] PhaseIncome { get; set; }
+        public int Nationality { get; set; }
     }
 }

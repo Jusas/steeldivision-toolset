@@ -9,5 +9,6 @@ namespace DeckToolbox.Resolvers
         string GetDivisionName(int divisionId);
         string GetDeckPackName(int deckPackId);
         int[] GetPhaseIncomes(int divisionId);
+        int GetNationality(int divisionId);
     }
 }
