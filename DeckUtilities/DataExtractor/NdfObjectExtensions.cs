@@ -12,10 +12,14 @@ namespace DataExtractor
         {
             var val = instance.PropertyValues.FirstOrDefault(pv => pv.Property.Name == propertyName)?.Value;
 
+            if (typeof(DataType) == typeof(bool))
+                return (val != null && !(val is NdfNull)) && bool.Parse(val.ToString());
             if (typeof(DataType) == typeof(int))
                 return (val == null || val is NdfNull) ? 0 : int.Parse(val.ToString());
             if (typeof(DataType) == typeof(string))
                 return (val == null || val is NdfNull) ? "" : val.ToString();
+            if (typeof(DataType) == typeof(float))
+                return (val == null || val is NdfNull) ? 0 : float.Parse(val.ToString());
             if (typeof(DataType) == typeof(UInt32))
                 return (val == null || val is NdfNull) ? 0 : UInt32.Parse(val.ToString());
             if (typeof(DataType) == typeof(int[]))

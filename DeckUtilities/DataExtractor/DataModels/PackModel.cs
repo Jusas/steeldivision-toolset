@@ -9,6 +9,6 @@
         public int ExperienceLevel { get; set; }
         public string TransportDescriptorId { get; set; }
         public string UnitDescriptorId { get; set; }
-        public int TransportAndUnitCount { get; set; }
+        public int TransportAndUnitCount { get; set; }        
     }
 }

@@ -13,5 +13,11 @@
         public int ProductionPrice { get; set; }
         public bool ResolvedIsRecon { get; set; }
         public bool ResolvedIsCommand { get; set; }
+        public bool ResolvedIsObserver { get; set; }
+        public int FrontalArmor { get; set; }
+        public double TurretArcAngle { get; set; }
+        public int MaxApDamage { get; set; }
+        public int MaxHeDamage { get; set; }
+        public bool HasWeapons { get; set; }
     }
 }
