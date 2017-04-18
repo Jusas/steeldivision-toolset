@@ -206,7 +206,7 @@ namespace DeckToolbox.Resolvers
                 return 0;
 
             var unitSource = _dataSources["Units"];
-            return (int)(unitSource.FirstOrDefault(x => x["DescriptorId"].ToString() == descriptorId)?["FrontalArmor"].Value<double>() ?? 0);
+            return (int)(unitSource.FirstOrDefault(x => x["DescriptorId"].ToString() == descriptorId)?["TurretArcAngle"].Value<double>() ?? 0);
         }
 
         public int GetMainUnitAp(int packId)
