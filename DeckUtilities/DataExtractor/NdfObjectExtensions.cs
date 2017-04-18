@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using moddingSuite.Model.Ndfbin;
 using moddingSuite.Model.Ndfbin.Types.AllTypes;
@@ -12,6 +13,8 @@ namespace DataExtractor
         {
             var val = instance.PropertyValues.FirstOrDefault(pv => pv.Property.Name == propertyName)?.Value;
 
+            if (typeof(DataType) == typeof(double))
+                return (val == null || val is NdfNull) ? 0 : double.Parse(val.ToString(), NumberStyles.Any, CultureInfo.InvariantCulture);
             if (typeof(DataType) == typeof(bool))
                 return (val != null && !(val is NdfNull)) && bool.Parse(val.ToString());
             if (typeof(DataType) == typeof(int))

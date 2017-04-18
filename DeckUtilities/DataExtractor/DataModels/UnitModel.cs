@@ -19,5 +19,6 @@
         public int MaxApDamage { get; set; }
         public int MaxHeDamage { get; set; }
         public bool HasWeapons { get; set; }
+        public int WeaponMaxRange { get; set; }
     }
 }

@@ -23,6 +23,7 @@ namespace DeckToolbox.Resolvers
         int GetMainUnitTurretArcAngle(int packId);
         int GetMainUnitAp(int packId);
         int GetMainUnitHe(int packId);
+        int GetMainUnitWeaponMaxRange(int packId);
 
         string[] GetValidPackFactoryNames();
     }

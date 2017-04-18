@@ -232,5 +232,17 @@ namespace DeckToolbox.Resolvers
             var unitSource = _dataSources["Units"];
             return unitSource.FirstOrDefault(x => x["DescriptorId"].ToString() == descriptorId)?["MaxHeDamage"].Value<int>() ?? 0;
         }
+
+        public int GetMainUnitWeaponMaxRange(int packId)
+        {
+            var source = _dataSources["Packs"];
+            var descriptorId = source.FirstOrDefault(x => x["Id"].ToString() == packId.ToString())?["UnitDescriptorId"].ToString();
+
+            if (descriptorId == null)
+                return 0;
+
+            var unitSource = _dataSources["Units"];
+            return unitSource.FirstOrDefault(x => x["DescriptorId"].ToString() == descriptorId)?["WeaponMaxRange"].Value<int>() ?? 0;
+        }
     }
 }

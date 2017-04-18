@@ -131,6 +131,7 @@ namespace DataExtractor.Extractors
 
                                 int biggestWeaponApValue = 0;
                                 int biggestWeaponHeValue = 0;
+                                double biggestWeaponRange = 0;
                                 bool hasWeapon = false;
                                 NdfObjectReference mainTurret = null;
                                 NdfObjectReference potentialMainTurret = null;
@@ -166,6 +167,9 @@ namespace DataExtractor.Extractors
                                         var isAp =
                                             (bool)
                                             (ammoRef?.Instance.GetInstancePropertyValue<bool>("PiercingWeapon") ?? false);
+                                        var weaponRange =
+                                            (double)
+                                            (ammoRef?.Instance.GetInstancePropertyValue<double>("PorteeMaximale") ?? 0);
 
                                         if (isAp && damageValue > biggestWeaponApValue)
                                         {
@@ -177,6 +181,8 @@ namespace DataExtractor.Extractors
                                             biggestWeaponHeValue = damageValue;
                                             potentialMainTurret = turretDescriptor;
                                         }
+                                        if (weaponRange > biggestWeaponRange)
+                                            biggestWeaponRange = weaponRange;
 
                                     }
 
@@ -186,6 +192,7 @@ namespace DataExtractor.Extractors
                                 unit.MaxApDamage = biggestWeaponApValue;
                                 unit.MaxHeDamage = biggestWeaponHeValue;
                                 unit.HasWeapons = hasWeapon;
+                                unit.WeaponMaxRange = (int)(biggestWeaponRange / 130); // world units, and divide by 130 gets us game units?
 
                                 if (biggestWeaponApValue == 0 && biggestWeaponHeValue > 0)
                                 {
