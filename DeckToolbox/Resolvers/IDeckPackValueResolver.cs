@@ -17,6 +17,13 @@ namespace DeckToolbox.Resolvers
         string GetFactoryName(int packId);
         bool GetIsRecon(int packId);
         bool GetIsCommand(int packId);
+        bool GetIsObserver(int packId);
+        bool GetMainUnitHasWeapons(int packId);
+        int GetMainUnitFrontalArmor(int packId);
+        int GetMainUnitTurretArcAngle(int packId);
+        int GetMainUnitAp(int packId);
+        int GetMainUnitHe(int packId);
+
         string[] GetValidPackFactoryNames();
     }
 }

@@ -160,5 +160,77 @@ namespace DeckToolbox.Resolvers
             var factoryIds = new int[] {3, 4, 6, 7, 10, 13, 14, 15};
             return factoryIds.Select(x => GetFactoryNameForFactoryId(x)).ToArray();
         }
+
+        public bool GetIsObserver(int packId)
+        {
+            var source = _dataSources["Packs"];
+            var descriptorId = source.FirstOrDefault(x => x["Id"].ToString() == packId.ToString())?["UnitDescriptorId"].ToString();
+
+            if (descriptorId == null)
+                return false;
+
+            var unitSource = _dataSources["Units"];
+            return unitSource.FirstOrDefault(x => x["DescriptorId"].ToString() == descriptorId)?["ResolvedIsObserver"].Value<bool>() ?? false;
+        }
+
+        public bool GetMainUnitHasWeapons(int packId)
+        {
+            var source = _dataSources["Packs"];
+            var descriptorId = source.FirstOrDefault(x => x["Id"].ToString() == packId.ToString())?["UnitDescriptorId"].ToString();
+
+            if (descriptorId == null)
+                return false;
+
+            var unitSource = _dataSources["Units"];
+            return unitSource.FirstOrDefault(x => x["DescriptorId"].ToString() == descriptorId)?["HasWeapons"].Value<bool>() ?? false;
+        }
+
+        public int GetMainUnitFrontalArmor(int packId)
+        {
+            var source = _dataSources["Packs"];
+            var descriptorId = source.FirstOrDefault(x => x["Id"].ToString() == packId.ToString())?["UnitDescriptorId"].ToString();
+
+            if (descriptorId == null)
+                return 0;
+
+            var unitSource = _dataSources["Units"];
+            return unitSource.FirstOrDefault(x => x["DescriptorId"].ToString() == descriptorId)?["FrontalArmor"].Value<int>() ?? 0;
+        }
+
+        public int GetMainUnitTurretArcAngle(int packId)
+        {
+            var source = _dataSources["Packs"];
+            var descriptorId = source.FirstOrDefault(x => x["Id"].ToString() == packId.ToString())?["UnitDescriptorId"].ToString();
+
+            if (descriptorId == null)
+                return 0;
+
+            var unitSource = _dataSources["Units"];
+            return (int)(unitSource.FirstOrDefault(x => x["DescriptorId"].ToString() == descriptorId)?["FrontalArmor"].Value<double>() ?? 0);
+        }
+
+        public int GetMainUnitAp(int packId)
+        {
+            var source = _dataSources["Packs"];
+            var descriptorId = source.FirstOrDefault(x => x["Id"].ToString() == packId.ToString())?["UnitDescriptorId"].ToString();
+
+            if (descriptorId == null)
+                return 0;
+
+            var unitSource = _dataSources["Units"];
+            return unitSource.FirstOrDefault(x => x["DescriptorId"].ToString() == descriptorId)?["MaxApDamage"].Value<int>() ?? 0;
+        }
+
+        public int GetMainUnitHe(int packId)
+        {
+            var source = _dataSources["Packs"];
+            var descriptorId = source.FirstOrDefault(x => x["Id"].ToString() == packId.ToString())?["UnitDescriptorId"].ToString();
+
+            if (descriptorId == null)
+                return 0;
+
+            var unitSource = _dataSources["Units"];
+            return unitSource.FirstOrDefault(x => x["DescriptorId"].ToString() == descriptorId)?["MaxHeDamage"].Value<int>() ?? 0;
+        }
     }
 }
