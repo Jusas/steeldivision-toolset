@@ -1,7 +1,7 @@
 ﻿{
   "DataSources": [
-    "E:\\SteamLibrary\\steamapps\\common\\Steel Division\\Data\\PC\\300077429\\NDF_Win.dat",
-    "E:\\SteamLibrary\\steamapps\\common\\Steel Division\\Data\\PC\\300077108\\ZZ_Win.dat"
+    "E:\\SteamLibrary\\steamapps\\common\\Steel Division\\Data\\PC\\300078029\\NDF_Win.dat",
+    "E:\\SteamLibrary\\steamapps\\common\\Steel Division\\Data\\PC\\390077915\\300078029\\ZZ_Win.dat"
   ],
   "DataMappings": {
     "DeckData": "$(DataSources.0):pc\\ndf\\patchable\\gfx\\everything.ndfbin",
