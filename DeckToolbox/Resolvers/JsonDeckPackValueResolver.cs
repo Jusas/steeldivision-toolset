@@ -244,5 +244,19 @@ namespace DeckToolbox.Resolvers
             var unitSource = _dataSources["Units"];
             return unitSource.FirstOrDefault(x => x["DescriptorId"].ToString() == descriptorId)?["WeaponMaxRange"].Value<int>() ?? 0;
         }
+
+        public string GetTransportDescriptorId(int packId)
+        {
+            var source = _dataSources["Packs"];
+            var descriptorId = source.FirstOrDefault(x => x["Id"].ToString() == packId.ToString())?["UnitDescriptorId"].ToString();
+            return descriptorId;
+        }
+
+        public string GetUnitDescriptorId(int packId)
+        {
+            var source = _dataSources["Packs"];
+            var descriptorId = source.FirstOrDefault(x => x["Id"].ToString() == packId.ToString())?["TransportDescriptorId"].ToString();
+            return descriptorId;
+        }
     }
 }
