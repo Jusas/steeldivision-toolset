@@ -248,14 +248,14 @@ namespace DeckToolbox.Resolvers
         public string GetTransportDescriptorId(int packId)
         {
             var source = _dataSources["Packs"];
-            var descriptorId = source.FirstOrDefault(x => x["Id"].ToString() == packId.ToString())?["UnitDescriptorId"].ToString();
+            var descriptorId = source.FirstOrDefault(x => x["Id"].ToString() == packId.ToString())?["TransportDescriptorId"].ToString();
             return descriptorId;
         }
 
         public string GetUnitDescriptorId(int packId)
         {
             var source = _dataSources["Packs"];
-            var descriptorId = source.FirstOrDefault(x => x["Id"].ToString() == packId.ToString())?["TransportDescriptorId"].ToString();
+            var descriptorId = source.FirstOrDefault(x => x["Id"].ToString() == packId.ToString())?["UnitDescriptorId"].ToString();
             return descriptorId;
         }
     }
