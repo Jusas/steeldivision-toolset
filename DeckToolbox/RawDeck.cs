@@ -22,6 +22,15 @@ namespace DeckToolbox
         public void BuildFromDeckString(string base64DeckString)
         {
             SourceDeckString = base64DeckString;
+
+            // It appears that in release additional @ markers are present when hero units are present in a deck.
+            // Example with Pz Lehr's Wittman unit: GR53knqhekF7UXsieVJ6kXfxeWJ5oXdheMF4MXkRemF3UXlxe6F48Xnxd9F7MneheIF4YnhxeoF6EXhRvHE=@AAG8eA==@
+            // It seems we can just happily ignore everything after the first @ mark.
+
+            var heroUnitMarker = SourceDeckString.IndexOf("@", StringComparison.OrdinalIgnoreCase);
+            if (heroUnitMarker != -1)
+                SourceDeckString = SourceDeckString.Substring(0, heroUnitMarker);
+
             var dataBytes = Convert.FromBase64String(SourceDeckString);
             //var bits = string.Concat(dataBytes.Select(b => Convert.ToString(b, 2).PadLeft(8, '0') + " "));
 
