@@ -6,7 +6,7 @@ namespace ReplayToolbox.Exceptions
 {
     public class ReplayParseException : Exception
     {
-        public ReplayParseException(string message, Exception innerException)
+        public ReplayParseException(string message, Exception innerException) : base(message, innerException)
         {
             
         }
