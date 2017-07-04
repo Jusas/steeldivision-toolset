@@ -118,7 +118,20 @@ namespace ReplayToolbox
                 _dataStream.Dispose();
 
             ReplayHeader = JsonConvert.DeserializeObject<ReplayHeader>(headerJson);
+            ValidateReplayHeaderData(ReplayHeader);
         }
 
+        private void ValidateReplayHeaderData(ReplayHeader replayHeader)
+        {
+            var errors = new List<string>();
+            if(string.IsNullOrEmpty(ReplayHeader.Game.Map))
+                errors.Add("Map is not set or is empty");
+
+            if (errors.Any())
+            {
+                var errorStr = string.Join("; ", errors);
+                throw new Exception("Replay header data was invalid: " + errorStr);
+            }
+        }
     }
 }
